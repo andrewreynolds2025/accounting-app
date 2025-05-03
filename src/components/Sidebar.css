@@ -3,11 +3,13 @@
   top: 0;
   right: 0;
   height: 100vh;
-  background: #fff;
+  background: #ffffff;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   transition: width 0.3s ease;
   z-index: 1000;
+  direction: rtl;
+  font-family: 'IRANSans', sans-serif;
 }
 
 .sidebar.open {
@@ -23,7 +25,7 @@
   top: 10px;
   left: 10px;
   background: #1976d2;
-  color: #fff;
+  color: #ffffff;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -42,10 +44,10 @@
 
 .menu-item {
   padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: #333333;
+  font-size: 1rem;
   transition: background 0.3s ease;
 }
 
@@ -53,19 +55,11 @@
   background: #f5f5f5;
 }
 
-.sub-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  padding-right: 20px;
+.menu-item.active {
+  background: #1976d2;
+  color: #ffffff;
 }
 
-.sub-menu-item {
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.sub-menu-item:hover {
-  background: #f0f0f0;
+.submenu {
+  padding-left: 20px;
 }
