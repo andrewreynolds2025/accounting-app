@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'AnjomanMax';
+  src: url('./AnjomanMax-Regular.woff2') format('woff2'),
+       url('./AnjomanMax-Regular.woff') format('woff'),
+       url('./AnjomanMax-Regular.ttf') format('truetype'),
+       url('./AnjomanMax-Regular.eot') format('embedded-opentype'),
+       url('./AnjomanMax-Regular.svg#AnjomanMax') format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AnjomanMax';
+  src: url('./AnjomanMax-Medium.woff2') format('woff2'),
+       url('./AnjomanMax-Medium.woff') format('woff'),
+       url('./AnjomanMax-Medium.ttf') format('truetype'),
+       url('./AnjomanMax-Medium.eot') format('embedded-opentype'),
+       url('./AnjomanMax-Medium.svg#AnjomanMax') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
