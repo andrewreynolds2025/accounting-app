@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
+import "./fonts/fonts.css";
 
 // Dashboard
 import Dashboard from './pages/Dashboard/Dashboard';
