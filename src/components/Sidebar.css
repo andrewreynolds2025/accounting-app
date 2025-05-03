@@ -73,8 +73,8 @@
 }
 .icon {
   display: flex;
-  font-size: 1.6rem;
-  min-width: 32px;
+  font-size: 1.35rem;
+  min-width: 28px;
   justify-content: center;
 }
 .menu-item.has-children > .menu-link {
@@ -148,5 +148,26 @@
     left: 0;
     top: 0;
     z-index: 5000;
+  }
+}
+.submenu-popup {
+  position: absolute;
+  right: 65px;
+  top: 0;
+  min-width: 170px;
+  background: #fff;
+  box-shadow: 0 2px 16px 0 #0002;
+  border-radius: 10px 0 0 10px;
+  z-index: 9999;
+  padding: 8px 0;
+  direction: rtl;
+}
+.submenu-popup .submenu-link {
+  padding: 10px 16px 10px 12px;
+}
+@media (max-width: 600px) {
+  .submenu-popup {
+    right: 55px;
+    min-width: 120px;
   }
 }
