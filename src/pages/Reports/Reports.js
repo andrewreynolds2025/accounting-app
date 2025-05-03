@@ -1,4 +1,3 @@
-// This is the Reports.js file for the Reports module
 import React from 'react';
 
 function Reports() {
