@@ -1,29 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Tab,
-  Tabs,
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  Avatar,
-  CircularProgress,
-  IconButton,
-  Stack
+  Box, Card, CardContent, Typography, Grid, Tab, Tabs, TextField, Button, Select, MenuItem, InputLabel,
+  FormControl, Avatar, CircularProgress, IconButton, Stack, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DatePicker from "react-multi-date-picker";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import "react-multi-date-picker/styles/colors/teal.css";
-import "../../fonts/fonts.css";
+import "@fontsource/vazirmatn";
 
 const MySwal = withReactContent(Swal);
 
@@ -45,7 +29,7 @@ export default function NewCustomer() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoryLoading, setCategoryLoading] = useState(false);
-  const [categoryPopup, setCategoryPopup] = useState(false);
+  const [categoryDialog, setCategoryDialog] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [relatedPersons, setRelatedPersons] = useState("");
   const [personType, setPersonType] = useState("مشتری");
@@ -138,7 +122,7 @@ export default function NewCustomer() {
         });
         if (res.ok) {
           setNewCategory("");
-          setCategoryPopup(false);
+          setCategoryDialog(false);
           await loadCategories();
           MySwal.fire({ icon: "success", title: "دسته‌بندی افزوده شد" });
         } else {
@@ -215,12 +199,11 @@ export default function NewCustomer() {
   // تب‌ها
   const tabLabels = ["عمومی", "آدرس", "تماس", "حساب بانکی", "سایر"];
 
-  // --- Render ---
   return (
     <Box sx={{
       maxWidth: 1100,
-      margin: "40px auto 0",
-      fontFamily: "'AnjomanMax'",
+      margin: "40px auto",
+      fontFamily: "'Vazirmatn', 'Anjoman', sans-serif",
       direction: "rtl"
     }}>
       <Card sx={{ p: 2, borderRadius: 4, boxShadow: 6 }}>
@@ -263,10 +246,10 @@ export default function NewCustomer() {
                   InputLabelProps={{ shrink: true }}
                 />
                 <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                  <input
-                    type="checkbox"
+                  <Checkbox
                     checked={accountCodeManual}
                     onChange={() => setAccountCodeManual(s => !s)}
+                    color="primary"
                     id="manual-code"
                   />
                   <label htmlFor="manual-code" style={{ fontSize: "0.97rem", color: "#1976d2", marginRight: 5 }}>ورود دستی</label>
@@ -295,7 +278,7 @@ export default function NewCustomer() {
                     value={selectedCategory}
                     onChange={e => setSelectedCategory(e.target.value)}
                     endAdornment={
-                      <IconButton onClick={() => setCategoryPopup(true)} size="small">
+                      <IconButton onClick={() => setCategoryDialog(true)} size="small">
                         <AddIcon />
                       </IconButton>
                     }
@@ -308,30 +291,23 @@ export default function NewCustomer() {
                     }
                   </Select>
                 </FormControl>
-                {/* پاپ‌آپ افزودن دسته‌بندی */}
-                {categoryPopup && (
-                  <Box sx={{
-                    position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
-                    bgcolor: "#000a", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center"
-                  }}>
-                    <Box sx={{
-                      bgcolor: "#fff", borderRadius: 3, boxShadow: 5, p: 4, minWidth: 270,
-                      display: "flex", flexDirection: "column", gap: 2
-                    }}>
-                      <TextField
-                        label="نام دسته‌بندی جدید"
-                        value={newCategory}
-                        onChange={e => setNewCategory(e.target.value)}
-                        autoFocus
-                        fullWidth
-                      />
-                      <Stack direction="row" spacing={1} justifyContent="flex-end">
-                        <Button variant="contained" color="primary" onClick={handleAddCategory}>افزودن</Button>
-                        <Button variant="outlined" color="secondary" onClick={() => setCategoryPopup(false)}>انصراف</Button>
-                      </Stack>
-                    </Box>
-                  </Box>
-                )}
+                {/* دیالوگ افزودن دسته‌بندی */}
+                <Dialog open={categoryDialog} onClose={() => setCategoryDialog(false)}>
+                  <DialogTitle>افزودن دسته‌بندی جدید</DialogTitle>
+                  <DialogContent>
+                    <TextField
+                      label="نام دسته‌بندی جدید"
+                      value={newCategory}
+                      onChange={e => setNewCategory(e.target.value)}
+                      autoFocus
+                      fullWidth
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleAddCategory} variant="contained" color="primary">افزودن</Button>
+                    <Button onClick={() => setCategoryDialog(false)} variant="outlined" color="secondary">انصراف</Button>
+                  </DialogActions>
+                </Dialog>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
                 <TextField label="اشخاص مرتبط" value={relatedPersons} onChange={e => setRelatedPersons(e.target.value)} fullWidth />
@@ -356,7 +332,7 @@ export default function NewCustomer() {
 
             {/* تب‌ها */}
             <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 1 }}>
-              {tabLabels.map((t, i) => <Tab key={i} label={t} sx={{ fontFamily: "'AnjomanMax'" }} />)}
+              {tabLabels.map((t, i) => <Tab key={i} label={t} sx={{ fontFamily: "'Vazirmatn'" }} />)}
             </Tabs>
             <Box sx={{ bgcolor: "#f7fafd", borderRadius: 2, p: 3, mb: 2, minHeight: 140 }}>
               {tab === 0 && (
@@ -388,10 +364,10 @@ export default function NewCustomer() {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={6} md={3} alignItems="center" display="flex">
-                    <input
-                      type="checkbox"
+                    <Checkbox
                       checked={taxRegistered}
                       onChange={e => setTaxRegistered(e.target.checked)}
+                      color="primary"
                       id="tax-reg"
                     />
                     <label htmlFor="tax-reg" style={{ marginRight: 7, fontSize: "0.97rem", color: "#1976d2" }}>
@@ -590,7 +566,7 @@ export default function NewCustomer() {
                 variant="contained"
                 color="primary"
                 size="large"
-                sx={{ borderRadius: 8, px: 7, fontWeight: "bold", fontFamily: "'AnjomanMax'" }}
+                sx={{ borderRadius: 8, px: 7, fontWeight: "bold", fontFamily: "'Vazirmatn'" }}
                 disabled={loading}
                 startIcon={loading && <CircularProgress size={18} />}
               >
